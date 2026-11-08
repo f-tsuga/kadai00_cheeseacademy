@@ -1,0 +1,565 @@
+/* ============================================================
+  学習用・シンプル版CSS
+  HTMLは「何を置くか」、CSSは「どう見せるか」。
+  セレクタの読み方：
+    header       → <header>タグ全部
+    .first       → class="first" の要素
+    #about       → id="about" の要素（このページで1つ）
+    #about p     → ABOUTの中にある全ての<p>
+    .course-row > img → course-rowの直下の画像だけ
+  classは必要な「まとまり」にだけ付けています。
+
+  よく出てくる単位：
+    px   → 画面上の点の数（固定サイズ）
+    %    → 親要素に対する割合
+    1fr  → グリッドで「残りのスペースを分け合う」1つ分
+    vw   → 画面の横幅の1%（5vw = 画面幅の5%）
+============================================================ */
+
+/* padding込みで幅を計算 */
+* {
+  box-sizing: border-box; /* width/heightにpaddingと枠線を含めて計算する（幅がはみ出しにくくなる） */
+}
+
+/* ナビをクリックしたとき、該当の場所までなめらかにスクロールする */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, "Yu Gothic", Meiryo, sans-serif; /* 使うフォント。左から順に、入っているものが使われる */
+  color: #222222;    /* 文字色（カラーガイドの黒） */
+  line-height: 1.75; /* 行の高さ。文字サイズの1.75倍（行間が広がって読みやすくなる） */
+}
+
+a {
+  color: inherit;         /* 文字色を親要素から引き継ぐ（リンク特有の青色をやめる） */
+  text-decoration: none;  /* リンクの下線を消す */
+}
+
+img {
+  display: block;  /* 画像を「ブロック要素」にする（画像の下にできる謎のすき間を防ぐ） */
+  max-width: 100%; /* 親要素の幅より大きくならないようにする */
+}
+
+/* サイトの外枠 */
+.wrap {
+  max-width: 1200px; /* 最大でも横幅1200pxまで */
+  margin: 0 auto;    /* 上下0、左右auto → 左右の余白を均等にして中央寄せ */
+  overflow: hidden;  /* はみ出した部分を隠す */
+}
+
+/* ① HEADER：タグ名だけで指定できるのでclass不要 */
+header {
+  min-height: 110px;               /* 高さを最低110pxにする（中身が多ければ伸びる） */
+  display: flex;                   /* 中の要素（ロゴとメニュー）を横並びにする */
+  align-items: center;             /* 横並びの要素を「縦方向」で中央にそろえる */
+  justify-content: space-between;  /* 横並びの要素を両端に配置（ロゴは左、メニューは右） */
+  padding: 30px 40px;              /* 内側の余白：上下30px、左右40px */
+  background: white;               /* 背景色を白に */
+}
+
+/* headerの中のロゴ画像 */
+header img {
+  width: 300px;  /* 横幅300px */
+  height: auto;  /* 高さは縦横比を保って自動計算 */
+}
+
+/* メニューを横並び */
+header ul {
+  display: flex;       /* リスト（li）を横並びにする */
+  align-items: center; /* 縦方向で中央にそろえる */
+  gap: 38px;           /* 並んだ要素どうしの間隔を38pxにする */
+}
+
+header li {
+  font-size: 21px; /* 文字の大きさ */
+}
+
+header a:hover {
+  color: #ffd61a; /* マウスを乗せたら黄色に */
+}
+
+/* ② FIRST：画像を背景として表示、文字を縦横中央へ */
+.first {
+  min-height: 380px; /* 高さを最低380pxにする */
+  background: url('../img/mainbg.png') center / cover no-repeat;
+  /* ↑ 背景画像の指定をまとめて書いたもの：
+       url(...)  → 使う画像
+       center    → 画像の中央を基準に配置
+       / cover   → 余白ができないよう、エリア全体を覆うサイズに拡大縮小（はみ出た部分は切れる）
+       no-repeat → 画像をタイル状にくり返さない */
+  display: flex;           /* 中身をflexで並べる */
+  align-items: center;     /* 縦方向で中央に */
+  justify-content: center; /* 横方向で中央に */
+  text-align: center;      /* 文字を中央寄せ */
+  color: white;            /* 文字色を白に */
+  padding: 30px 15px;      /* 内側の余白：上下30px、左右15px */
+}
+
+.first h1 {
+  font-size: 48px;     /* 文字の大きさ */
+  font-weight: bold;    /* 太字 */
+  line-height: 1.4;     /* 行の高さ（文字サイズの1.4倍） */
+  margin-bottom: 18px;  /* 下側の外側余白（下のpとの間隔） */
+}
+
+.first p {
+  font-size: 32px; /* 文字の大きさ */
+}
+
+/* 共通見出し：HTMLで class="section-heading" を何度も再利用 */
+.section-heading {
+  text-align: center;  /* 文字を中央寄せ */
+  padding: 60px 16px;  /* 内側の余白：上下60px、左右16px */
+}
+
+.section-heading h2 {
+  font-size: 24px;      /* 文字の大きさ */
+  font-weight: bold;    /* 太字 */
+  line-height: 1.4;     /* 行の高さ */
+  margin-bottom: 30px;  /* 下側の外側余白 */
+}
+
+/* 日本語タイトル */
+.section-heading p {
+  font-size: 18px;   /* 文字の大きさ */
+  line-height: 1.8;  /* 行の高さ */
+}
+
+/* タイトルではなく説明文の段落は本文サイズに */
+#course .section-heading p,
+#method .section-heading p+p {
+  font-size: 16px;
+}
+
+/* ABOUTとNEWSの見出しだけ黄色：IDを使って範囲を限定 */
+/* カンマ(,)で区切ると、複数のセレクタに同じ指定をまとめて書ける */
+#about .section-heading h2,
+#news .section-heading h2 {
+  color: #ffd61a; /* 文字色を黄色に */
+}
+
+/* ③ ABOUT */
+.about-copy {
+  text-align: center;     /* 文字を中央寄せ */
+  font-size: 16px;        /* 文字の大きさ */
+  line-height: 2.2;       /* 行の高さ（かなり広め） */
+  padding: 0 20px 60px;   /* 内側の余白：上0、左右20px、下60px */
+}
+
+/* 2つ目以降の段落だけ余白（p+p → pのすぐ後ろにあるp） */
+.about-copy p+p {
+  margin-top: 40px; /* 上側の外側余白（段落と段落の間隔） */
+}
+
+.about-gallery {
+  display: flex; /* 画像を横並びにする */
+}
+
+.about-gallery img {
+  width: 25%;         /* 横幅を親の25%に（4枚で100%＝ぴったり1行） */
+  height: 230px;      /* 高さ230px */
+  object-fit: cover;  /* 指定サイズの枠を埋めるように画像を拡大縮小（はみ出た部分は切れる。画像がゆがまない） */
+}
+
+/* VISION：濃い背景に白文字 */
+#vision {
+  background: #343b34;  /* 背景色（濃い緑がかったグレー） */
+  color: white;         /* 文字色を白に（中の見出しや文章にも引き継がれる） */
+  text-align: center;   /* 文字を中央寄せ */
+  padding-bottom: 90px; /* 下側の内側余白 */
+}
+
+#vision .section-heading {
+  padding-top: 90px; /* 上の余白を広めに */
+}
+
+/* #vision>p → 見出しの外にある本文のpだけ */
+#vision>p {
+  font-size: 16px;        /* 文字の大きさ */
+  line-height: 2.75;      /* 行の高さ（ゆったり） */
+  letter-spacing: 0.05em; /* 文字と文字の間隔を少し広げる */
+  padding: 0 20px;        /* 内側の余白：上下0、左右20px */
+}
+
+/* METHOD：薄いグレーの背景にカードを4つ並べる */
+#method {
+  background: #fafafa;  /* 背景色（ごく薄いグレー） */
+  padding-bottom: 80px; /* 下側の内側余白 */
+}
+
+#method .section-heading p {
+  color: #555; /* 文字色を少し薄く */
+}
+
+#method .section-heading p+p {
+  margin-top: 12px; /* 2つ目の段落との間隔 */
+}
+
+.method-steps {
+  display: grid;                         /* グリッドで並べる */
+  grid-template-columns: repeat(4, 1fr); /* 同じ幅の列を4つ作る */
+  gap: 20px;                             /* カードどうしの間隔 */
+  padding: 0 40px;                       /* 内側の余白：上下0、左右40px */
+}
+
+.method-steps article {
+  background: white;            /* カードの背景を白に */
+  border-top: 4px solid #ffd61a; /* 上だけ黄色い線：太さ4px、実線 */
+  padding: 45px 28px 35px;      /* 内側の余白：上45px、左右28px、下35px */
+}
+
+/* 番号（01〜04） */
+.method-steps span {
+  display: block;       /* ブロック要素にする（下に余白を付けられるように） */
+  font-size: 32px;      /* 文字の大きさ */
+  font-weight: bold;    /* 太字 */
+  line-height: 1;       /* 行の高さ（余計なすき間をなくす） */
+  color: #e0b000;       /* 文字色（少し濃い黄色） */
+  margin-bottom: 40px;  /* 下側の外側余白 */
+}
+
+.method-steps h3 {
+  font-size: 18px;      /* 文字の大きさ */
+  font-weight: bold;    /* 太字 */
+  margin-bottom: 25px;  /* 下側の外側余白 */
+}
+
+.method-steps p {
+  font-size: 16px;   /* 文字の大きさ */
+  line-height: 2.1;  /* 行の高さ */
+  color: #555;       /* 文字色を少し薄く */
+}
+
+/* ④ COURSE：1行の中に画像と説明を半分ずつ */
+.course-row {
+  display: flex;      /* 画像と説明文を横並びにする */
+  min-height: 380px;  /* 高さを最低380pxにする */
+}
+
+/* > は「直下の子要素だけ」という意味 */
+.course-row>img {
+  width: 50%;         /* 横幅を半分に */
+  object-fit: cover;  /* 枠を埋めるように画像を拡大縮小（ゆがまない） */
+}
+
+.course-row>div {
+  width: 50%;               /* 横幅を半分に */
+  background: #fafafa;      /* 背景色（ごく薄いグレー） */
+  display: flex;            /* 中身をflexで並べる */
+  flex-direction: column;   /* 並べる方向を「縦」にする（見出しと文章を縦に積む） */
+  justify-content: center;  /* 並べる方向（＝縦）で中央にそろえる → 上下の余白（③と④）が常に等しくなる */
+  padding: 60px 50px;       /* 内側の余白：上下60px、左右50px */
+}
+
+/* 説明文の横幅は最大480px */
+.course-row>div>* {
+  max-width: 480px;
+}
+
+.course-row h3 {
+  font-size: 18px;      /* 文字の大きさ */
+  font-weight: bold;    /* 太字 */
+  margin-bottom: 30px;  /* 下側の外側余白 */
+}
+
+.course-row p {
+  font-size: 16px;   /* 文字の大きさ */
+  line-height: 1.9;  /* 行の高さ */
+}
+
+/* 最後の段落（対象：〜）だけ上に余白をあける */
+.course-row p:last-child {
+  margin-top: 16px;  /* 上側の外側余白 */
+}
+
+/* 2段目だけ左右反転（class="course-row reverse" の両方を持つ要素） */
+.course-row.reverse {
+  flex-direction: row-reverse; /* 横並びの順番を逆にする（画像が右、文章が左になる） */
+}
+
+/* ⑤ NEWS：articleタグを指定するので個別のclassは不要 */
+#news {
+  padding-bottom: 60px; /* 下側の内側余白 */
+}
+
+.news-list {
+  margin: 0 auto 60px;      /* 外側の余白：上0、左右auto（中央寄せ）、下60px */
+  display: flex;            /* 記事を横並びにする */
+  flex-wrap: wrap;          /* 入りきらないときは次の行へ */
+  justify-content: center;  /* 横方向で中央にそろえる */
+  gap: 30px;                /* 記事どうしの間隔 */
+  padding: 0 15px;          /* 内側の余白：上下0、左右15px */
+}
+
+.news-list article {
+  width: 300px;     /* 各NEWSの横幅300px */
+  font-size: 16px;  /* 文字の大きさ */
+  cursor: pointer;  /* マウスを乗せたとき、カーソルを指のマークにする */
+  transition: opacity 0.3s; /* 透明度の変化をなめらかに */
+}
+
+/* NEWSのどこにマウスを乗せても、記事全体が少し透ける */
+.news-list article:hover {
+  opacity: 0.7;
+}
+
+.news-list img {
+  width: 100%;              /* 横幅を親（article）いっぱいに */
+  aspect-ratio: 300 / 200;  /* 縦横比を 横300：縦200（＝3:2）に固定 */
+  object-fit: cover;        /* 枠を埋めるように画像を拡大縮小（ゆがまない） */
+  margin-bottom: 20px;      /* 下側の外側余白 */
+}
+
+.news-list time {
+  display: block;       /* ブロック要素にする（1行まるごと使い、次の要素を改行させる） */
+  margin-bottom: 20px;  /* 下側の外側余白 */
+}
+
+.news-list p {
+  line-height: 1.8; /* 行の高さ */
+}
+
+/* Moreリンクと送信ボタン：違うタグでも共通デザイン */
+.button,
+#contact button {
+  display: block;       /* ブロック要素にする（幅や中央寄せを指定できるように） */
+  width: 300px;         /* 横幅300px */
+  height: 60px;         /* 高さ60px */
+  margin: 0 auto;       /* 左右autoで中央寄せ */
+  background: #ffd61a;  /* 背景色を黄色に */
+  text-align: center;   /* 文字を中央寄せ */
+  border: 0;            /* 枠線を消す（ボタン標準の枠線をなくす） */
+  color: white;         /* 文字色を白に */
+  font: inherit;        /* フォント設定を親から引き継ぐ（ボタンは標準で別フォントになるため） */
+  font-size: 18px;      /* 文字の大きさ（font: inherit より後に書く） */
+  line-height: 60px;    /* 行の高さを高さと同じにして、文字を上下中央に */
+  cursor: pointer;      /* マウスを乗せたとき、カーソルを指のマークにする */
+  transition: background 0.3s; /* 色の変化を0.3秒かけてなめらかに */
+}
+
+.button:hover,
+#contact button:hover {
+  background: #e6bd00; /* マウスを乗せたら少し濃い黄色に */
+}
+
+/* ⑥ ACCESS：idで範囲を指定 */
+#access {
+  background: #fafafa; /* 背景色（ごく薄いグレー） */
+}
+
+/* iframe → Googleマップなど、別のページを埋め込む枠 */
+#access iframe {
+  display: block;  /* ブロック要素にする（下のすき間を防ぐ） */
+  width: 100%;     /* 横幅いっぱい */
+  height: 300px;   /* 高さ300px */
+  border: 0;       /* 枠線を消す */
+}
+
+/* dl → 「項目名(dt)」と「内容(dd)」のペアを並べるリスト */
+#access dl {
+  max-width: 650px;               /* 最大でも横幅650pxまで */
+  margin: 0 auto;                 /* 中央寄せ */
+  padding: 60px 20px;             /* 内側の余白：上下60px、左右20px */
+  display: grid;                  /* グリッド（表のようなマス目）で並べる */
+  grid-template-columns: 150px 1fr; /* 列を2つ作る：1列目は150px、2列目は残り全部 */
+  gap: 12px 50px;                 /* 間隔：行と行の間は12px、項目名と内容の間は50px */
+  font-size: 16px;                /* 文字の大きさ */
+}
+
+/* ⑦ CONTACT：フォームの行だけclassを残す */
+#contact {
+  padding-bottom: 140px; /* 下側の内側余白 */
+}
+
+#contact>p {
+  text-align: center;     /* 文字を中央寄せ */
+  font-size: 16px;        /* 文字の大きさ */
+  line-height: 2;         /* 行の高さ */
+  padding: 0 15px 70px;   /* 内側の余白：上0、左右15px、下70px */
+}
+
+#contact form {
+  max-width: 670px;  /* タイトル240px＋パーツ400px＋左右の余白 */
+  margin: 0 auto;    /* 中央寄せ */
+  padding: 0 15px;   /* 内側の余白：上下0、左右15px */
+}
+
+.form-row {
+  display: grid;                      /* グリッドで並べる */
+  grid-template-columns: 240px 400px; /* 列を2つ：左（タイトル）は240px、右（フォームパーツ）は400px */
+  align-items: start;                 /* マスの中で、要素を上端にそろえる */
+  margin-bottom: 30px;                /* 下側の外側余白（次の行との間隔） */
+  font-size: 16px;                    /* 文字の大きさ */
+  border: 0;                          /* 枠線を消す（fieldsetタグの標準の枠線をなくす） */
+}
+
+.form-row>label,
+.form-row legend {
+  padding-top: 4px; /* 上側の内側余白（入力欄の文字と高さをそろえるため） */
+}
+
+/* :not([type='checkbox']) → チェックボックス「以外」のinput */
+.form-row input:not([type='checkbox']),
+.form-row select,
+.form-row textarea {
+  width: 328px;             /* 横幅328px */
+  border: 1px solid #bfbfbf; /* 枠線：太さ1px、実線、グレー */
+  background: white;        /* 背景色を白に */
+  padding: 0 9px;           /* 内側の余白：上下0、左右9px */
+  font: inherit;            /* フォント設定を親から引き継ぐ */
+  border-radius: 0;         /* 角の丸みをなくす（スマホなどで勝手に丸くなるのを防ぐ） */
+}
+
+.form-row input:not([type='checkbox']),
+.form-row select {
+  height: 36px; /* 高さ36px */
+}
+
+.form-row textarea {
+  padding: 9px;     /* 複数行なので上下にも余白 */
+  resize: vertical; /* ユーザーがサイズ変更できるのを「縦方向だけ」にする */
+}
+
+.form-row legend {
+  float: left;   /* 左に寄せる（legendはそのままだとグリッドに入らないため） */
+  width: 240px;  /* 横幅を左の列と同じ240pxに */
+}
+
+.form-row>div {
+  grid-column: 2;           /* グリッドの2列目（右側）に置く */
+  display: flex;            /* 中身をflexで並べる */
+  flex-direction: column;   /* 縦方向に並べる（チェックボックスを縦に積む） */
+  gap: 12px;                /* 要素どうしの間隔 */
+}
+
+.form-row>div label {
+  display: flex;            /* チェックボックスと文字を横並びにする */
+  gap: 12px;                /* チェックボックスと文字の間隔 */
+  align-items: baseline;    /* 文字の下のライン（ベースライン）で高さをそろえる */
+}
+
+.form-row input[type='checkbox'] {
+  accent-color: #ffd61a; /* チェックボックスにチェックを入れたときの色を黄色に */
+}
+
+#contact button {
+  margin-top: 60px; /* 上側の外側余白 */
+}
+
+/* ⑧ FOOTER：footerタグを直接指定 */
+footer {
+  background: #707070;  /* 背景色（グレー） */
+  color: white;         /* 文字色を白に */
+  text-align: center;   /* 文字を中央寄せ */
+  padding: 30px 10px;   /* 内側の余白：上下30px、左右10px */
+  font-size: 13px;      /* 文字の大きさ */
+}
+
+/* 画面幅760px以下：スマホでは縦並びに切り替える */
+/* @media (max-width: 760px) { ... } → 画面幅が760px以下のときだけ、中の指定が使われる */
+@media (max-width: 760px) {
+  header {
+    padding: 18px;           /* 内側の余白（上下左右18px） */
+    flex-direction: column;  /* 横並びをやめて縦並びに（ロゴの下にメニュー） */
+    gap: 20px;               /* ロゴとメニューの間隔 */
+  }
+
+  header img {
+    width: 230px; /* ロゴを少し小さく */
+  }
+
+  header ul {
+    flex-wrap: wrap;          /* 1行に入りきらない要素を、次の行に折り返す（指定しないと1行に詰め込まれてはみ出す） */
+    justify-content: center;  /* 横方向で中央にそろえる */
+    gap: 12px 20px;           /* 間隔：行と行の間は12px、横の要素どうしは20px */
+  }
+
+  header li {
+    font-size: 12px; /* 文字を小さく */
+  }
+
+  .first {
+    min-height: 280px; /* 高さを低めに */
+  }
+
+  .first h1 {
+    font-size: clamp(24px, 5vw, 36px);
+    /* ↑ clamp(最小, 基本, 最大)：基本は画面幅の5%の大きさ。
+         ただし24pxより小さく、36pxより大きくはならない */
+  }
+
+  .first p {
+    font-size: clamp(15px, 3vw, 22px); /* 画面幅の3%。最小15px〜最大22px */
+  }
+
+  .section-heading {
+    padding: 45px 15px; /* 内側の余白を少し狭く */
+  }
+
+  .about-copy {
+    font-size: 14px; /* 文字を小さく */
+  }
+
+  .about-gallery {
+    flex-wrap: wrap; /* 入りきらない画像を次の行に折り返す */
+  }
+
+  .about-gallery img {
+    width: 50%;     /* 横幅を半分に（2枚で1行 → 4枚で2行になる） */
+    height: 140px;  /* 高さを低めに */
+  }
+
+  .course-row,
+  .course-row.reverse {
+    flex-direction: column; /* 縦並びに（画像の下に説明文） */
+  }
+
+  .course-row>img,
+  .course-row>div {
+    width: 100%; /* 横幅いっぱいに */
+  }
+
+  .course-row>img {
+    max-height: 270px; /* 画像の高さを最大270pxまでに */
+  }
+
+  .course-row>div {
+    padding: 35px 25px; /* 内側の余白を狭く */
+  }
+
+  .news-list {
+    flex-direction: column; /* 記事を縦並びに */
+    align-items: center;    /* 横方向で中央にそろえる */
+  }
+
+  .news-list article {
+    max-width: 100%; /* 画面が300pxより狭いときははみ出さないように */
+  }
+
+  #access dl {
+    grid-template-columns: 110px 1fr; /* 1列目を110pxに狭める */
+    font-size: 13px;                  /* 文字を小さく */
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; /* 列を1つだけに（項目名の下に入力欄） */
+    gap: 5px;                   /* 間隔を狭く */
+  }
+
+  .form-row input:not([type='checkbox']),
+  .form-row select,
+  .form-row textarea {
+    width: 100%; /* スマホでは横幅いっぱいに */
+  }
+
+  .form-row legend {
+    float: none;  /* 左寄せを解除 */
+    width: auto;  /* 横幅を自動に戻す */
+  }
+
+  .form-row>div {
+    grid-column: 1; /* 列が1つになったので1列目に置く */
+  }
+}

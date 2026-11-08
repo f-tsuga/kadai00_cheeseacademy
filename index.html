@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!-- HTMLは「何をどこに置くか」を決める設計図。CSSはその見た目を決めます。 -->
+<html lang="ja">
+
+<head>
+  <!-- head：画面には直接表示されないページの基本設定 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheese ACADEMY TOKYO</title>
+  <!-- CSSを読み込む。リセット→独自デザインの順番が重要です。 -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- .wrap：サイト全体の幅を決める唯一の外枠。CSS .wrap に対応。 -->
+  <div class="wrap">
+    <!-- ① headerタグそのものをCSSの header で指定。classは不要です。 -->
+    <header>
+      <img src="img/header_logo.png" alt="Cheese ACADEMY TOKYO">
+      <!-- nav=ナビゲーション（メニュー） -->
+      <nav aria-label="メインメニュー">
+        <ul>
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#course">COURSE</a></li>
+          <li><a href="#news">NEWS</a></li>
+          <li><a href="#access">ACCESS</a></li>
+          <li><a href="#contact">CONTACT</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ② firstだけclassを使用。CSS .first が背景画像と中央配置を担当。 -->
+      <section class="first">
+        <div>
+          <h1>チーズづくりを通して<br>リーダーシップを学ぼう</h1>
+          <p>いつもと違う体験から、自分や仲間の新しい一面に出会う。<br>大人のための、体験型ラーニングアカデミー。
+        </div>
+      </section>
+
+  <!-- ③ ABOUT：sectionは内容のまとまり。idはCSSで範囲を指定するため -->
+  <section id="about">
+    <!-- section-headingは共通部品：見出しを全セクションで同じ見た目にする。 -->
+    <div class="section-heading">
+      <h2>ABOUT</h2>
+      <p>チーズアカデミーについて</p>
+    </div>
+
+    <div class="about-copy">
+      <p>おいしい体験が、人と組織を変えるきっかけになる。</p>
+      <p>チーズづくりには、たくさんの発見があります。</p>
+      <p>同じ材料でも、つくり方や環境によって仕上がりは変わる。<br>思い通りにならないこともある。<br>仲間と力を合わせることで、ひとりでは気づけなかったことが見えてくる。</p>
+      <p>それは、私たちが日々向き合う仕事やチームづくりにも、どこか似ています。</p>
+      <p>Cheese ACADEMYは、そんなチーズづくりの奥深さを、<br>人と組織の学びにつなげる場所です。</p>
+    </div>
+
+    <!-- about-galleryは画像4枚のまとまり。CSS .about-gallery img で中の画像を指定。 -->
+    <div class="about-gallery">
+      <img src="img/about_01.jpg" alt="ピザ">
+      <img src="img/about_02.jpg" alt="チーズ職人">
+      <img src="img/about_03.jpg" alt="農園">
+      <img src="img/about_04.jpg" alt="試食風景">
+    </div>
+  </section>
+
+  <!-- VISION：目指す社会像を伝えるセクション。 -->
+  <section id="vision">
+    <div class="section-heading">
+      <h2 class="yellow">
+        OUR VISION
+      </h2>
+      <p>
+        可能性が育つ社会へ。
+      </p>
+    </div>
+    <p>
+      一人ひとりの個性、組織の多様性、地域の資源。
+      <br />
+      異なるものが出会い、互いに作用することで、新しい価値が生まれる。
+      <br />
+      チーズから始まる学びを通じて、人と組織と地域がともに育つ未来を目指します。
+    </p>
+  </section>
+
+  <!-- METHOD：学習プロセス4段階。articleは独立した情報のまとまり。 -->
+  <section id="method">
+    <div class="section-heading">
+      <h2>
+        OUR METHOD
+      </h2>
+      <p>
+        楽しいだけで終わらない学び。
+      </p>
+      <p>
+        体験が、気づきに。気づきが、行動に。
+        <br />
+        チーズづくりをきっかけに、日常の自分やチームを見つめ直す4つのステップ。
+      </p>
+    </div>
+    <div class="method-steps">
+      <article>
+        <span>
+          01
+        </span>
+        <h3>
+          体験する
+        </h3>
+        <p>
+          仲間と協力しながら、五感を使ってチーズづくりに挑戦する。
+        </p>
+      </article>
+      <article>
+        <span>
+          02
+        </span>
+        <h3>
+          発見する
+        </h3>
+        <p>
+          自分や他者の行動、役割分担や関係性の特徴に気づく。
+        </p>
+      </article>
+      <article>
+        <span>
+          03
+        </span>
+        <h3>
+          意味づける
+        </h3>
+        <p>
+          対話を通じて、リーダーシップや組織づくりと結びつける。
+        </p>
+      </article>
+      <article>
+        <span>
+          04
+        </span>
+        <h3>
+          実践する
+        </h3>
+        <p>
+          職場や日常で試したい、小さな行動を具体的に決める。
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ④ COURSE：画像＋文章を3組。CSS .course-row が左右2列に配置 -->
+  <section id="course">
+    <div class="section-heading">
+      <h2>COURSE</h2>
+      <p>3つの学びの旅。<br>自分を知る。仲間とつながる。社会の未来を考える。<br>目的に合わせて選べる３つのプログラムをご用意しています。</p>
+    </div>
+
+    <div class="course-row"><img src="img/course_01.jpg" alt="広大な農園">
+      <div>
+        <h3>COURSE 01<br>Cheese & Me 自分を育てる</h3>
+        <p>
+          チーズづくりから、自分らしいリーダーシップを発見する。</p>
+        <p>ものづくりを通じて、自分の価値観や行動のクセを見つめ直します。</p>
+        <p>対象：社会人・管理職・次世代リーダー</p>
+      </div>
+    </div>
+
+    <!-- 同じ要素に2クラス：course-row reverse。CSS .reverse で左右を逆に。 -->
+    <div class="course-row reverse"><img src="img/course_02.jpg" alt="講師">
+      <div>
+        <h3>COURSE 02<br>Cheese & Us 仲間と育てる</h3>
+        <p>一緒につくると、いつものチームが違って見える。</p>
+        <p>チーズづくりを通じて、仲間の強みや関わり方に気づき、対話と協働を深めます。</p>
+        <p>対象：企業チーム・プロジェクト・管理職チーム</p>
+      </div>
+    </div>
+
+    <div class="course-row"><img src="img/course_03.jpg" alt="チーズのテイスティング">
+      <div>
+        <h3>COURSE 03<br>Cheese & Future 未来を育てる</h3>
+        <p>チーズの向こうに、地域の未来が見えてくる。</p>
+        <p>酪農家やチーズ職人との出会いから、食と地域の課題を知り、新しい価値を探究します。</p>
+        <p>対象：社会人・企業・地域共創に関心のある方</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ news-list内のarticleは全部同じ見た目。各articleにclassを付ける必要なし。 -->
+  <section id="news">
+    <div class="section-heading">
+      <h2>NEWS & STORIES</h2>
+      <p>アカデミーからのお知らせ。</p>
+    </div>
+    <div class="news-list">
+
+      <article><img src="img/news_img.jpg" alt="ピザ"><time datetime="2016-11-18">2016/11/18</time>
+        <p>COMING SOON<br>プログラムの開催情報を準備中です。</p>
+      </article>
+
+      <article><img src="img/news_img.jpg" alt="ピザ"><time datetime="2016-11-18">2016/11/18</time>
+        <p>COMING SOON<br>プログラムの開催情報を準備中です。</p>
+      </article>
+
+      <article><img src="img/news_img.jpg" alt="ピザ"><time datetime="2016-11-18">2016/11/18</time>
+        <p>COMING SOON<br>チーズづくりと学びのストーリーをお届けします。</p>
+      </article>
+
+    </div><a class="button">More</a>
+  </section>
+
+
+  <!-- ⑥ #access iframe と書けば地図だけを指定できる。dl/dt/ddは項目と値。 -->
+  <section id="access">
+    <div class="section-heading">
+      <h2>Access</h2>
+      <p>会社情報</p>
+    </div>
+
+    <iframe title="学校周辺の地図"
+      src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%B8%AF%E5%8C%BA%E5%8C%97%E9%9D%92%E5%B1%B13-5-6&output=embed"
+      loading="lazy"></iframe>
+
+    <dl>
+      <dt>学校名</dt>
+      <dd>チーズアカデミーTOKYO</dd>
+      <dt>事務所所在地</dt>
+      <dd>〒107-0061 東京都港区北青山××××</dd>
+      <dt>TEL</dt>
+      <dd>03-××××-××××</dd>
+      <dt>FAX</dt>
+      <dd>03-××××-××××</dd>
+      <dt>MAIL</dt>
+      <dd>××××@cheeseacademy.tokyo</dd>
+    </dl>
+  </section>
+
+
+  <!-- ⑦ 入力欄のidはlabelのforと結びつけるために使う。 -->
+  <section id="contact">
+    <div class="section-heading">
+      <h2>CONTACT</h2>
+      <p>説明会お申し込み・お問い合わせ</p>
+    </div>
+
+    <p>
+      ぜひ1度、足を運んでみませんか。説明会は随時開催中。<br>その他、お問い合わせもお気軽にどうぞ。お待ちしております。<br><br>※チーズアカデミーは実際には存在しません。<br>間違っても問い合わせしないようお願いいたします。
+    </p>
+
+    <!-- actionを設定していない学習用フォーム。送信時は何も送らず画面に案内を表示 -->
+    <form onsubmit="event.preventDefault(); alert('学習用フォームのため送信されません。');">
+      <div class="form-row"><label for="name">名前</label><input id="name" name="name" type="text" required></div>
+      <div class="form-row"><label for="kana">カナ</label><input id="kana" name="kana" type="text" required></div>
+      <div class="form-row"><label for="email">メールアドレス</label><input id="email" name="email" type="email" required>
+      </div>
+      <!-- select はプルダウン、option は選択肢 -->
+      <div class="form-row"><label for="reason">興味のあるコースを</label><select id="reason" name="reason">
+          <option value="">選択してください</option>
+          <option>Cheese & Me 自分を育てる</option>
+          <option>Cheese & Us 仲間と育てる</option>
+          <option>Cheese & Future</option>
+          <option>その他・相談したい</option>
+        </select>
+      </div>
+
+      <!-- checkbox は複数選択が可能。fieldset で関連する入力欄をまとめる -->
+      <fieldset class="form-row">
+        <legend>参加・相談の目的</legend>
+        <div>
+          <label><input type="checkbox" name="motivation" value="個人">個人参加</label>
+          <label><input type="checkbox" name="motivation" value="法人">法人研修</label>
+          <label><input type="checkbox" name="motivation" value="地域">地域連携</label>
+          <label><input type="checkbox" name="motivation" value="他">その他</label>
+        </div>
+      </fieldset>
+
+      <!-- textarea は複数行の自由記入欄 -->
+      <div class="form-row">
+        <label for="details">詳細</label>
+        <textarea id="details" name="details" rows="5"></textarea>
+      </div>
+      <button type="submit">送信</button>
+    </form>
+  </section>
+  </main>
+  <!-- ⑧ footerタグをCSS footer で指定。classは不要。 -->
+
+  <footer><small>copyrights 2026 Cheese Academy Tokyo All Rights Reserved.</small></footer>
+  </div>
+</body>
+
+</html>
