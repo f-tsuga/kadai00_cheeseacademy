@@ -5,7 +5,7 @@
 - チーズアカデミーの仕様書をもとにLPをつくり、それを土台として、コンテンツを少しだけ自分流にアレンジしてみました。
 
 ## ③アプリのデプロイURL
-https://f-tsuga.github.io/kadai00_cheeseacademy/
+https://ga-tsu.github.io/kadai00_cheeseacademy/
 
 ## ④工夫した点・こだわった点
 - （かなりAIに頼ってますが）Vison、Methodというsectionを追加してみました。
